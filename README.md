@@ -8,3 +8,5 @@ Features:
  - Buttons blocked
  - No door blocking
  - idk more...
+
+__HARDCODED STUFF INCLUDED (SETTINGS, GERMAN MESSAGES, ...)__
