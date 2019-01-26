@@ -2,11 +2,14 @@
 #include <cstrike>
 #include <sdktools>
 #include <sdkhooks>
-#include <outbreak>
+#include <multicolors>
 
 #pragma semicolon 1
 #pragma newdecls required
 
+#define LoopClients(%1) for(int %1 = 1; %1 <= MaxClients; %1++) if(IsClientValid(%1))
+#define TEXT "{default}"
+#define SPECIAL "{lightgreen}"
 
 bool g_bBlockCommand;
 bool g_bRedie[MAXPLAYERS+1] = { false, ... };
@@ -14,7 +17,6 @@ bool g_bNoclipBlock[MAXPLAYERS+1] = { false, ... };
 
 Handle g_hNoclip[MAXPLAYERS+1] = { null, ... };
 Handle g_hNoclipReset[MAXPLAYERS+1] = { null, ... };
-
 
 public Plugin myinfo =
 {
@@ -60,6 +62,8 @@ public void OnPluginStart()
 		SDKHook(i, SDKHook_WeaponEquip, OnWeaponCanUse);
 		SDKHook(i, SDKHook_TraceAttack, OnTraceAttack);
 	}
+
+	CSetPrefix("{darkblue}[Redie]{default}");
 }
 
 public void OnClientPutInServer(int client)
@@ -132,21 +136,21 @@ public Action Command_redie(int client, int args)
 							SetListenOverride(i, client, Listen_Yes);
 					}
 		
-					CPrintToChat(client, "%s Du bist nun ein Geist.", OUTBREAK);
+					CPrintToChat(client, "Du bist nun ein Geist.");
 				}
 				else
 				{
-					CPrintToChat(client, "%s Du musst bis zur nächsten Runde warten.", OUTBREAK);
+					CPrintToChat(client, "Du musst bis zur nächsten Runde warten.");
 				}
 			}
 			else
 			{
-				CPrintToChat(client, "%s Du musst in einem Team sein, um %s!redie %snutzen zu können.", OUTBREAK, SPECIAL, TEXT);
+				CPrintToChat(client, "Du musst in einem Team sein, um %s!redie %snutzen zu können.", SPECIAL, TEXT);
 			}
 		}
 		else
 		{
-			CPrintToChat(client, "%s Du musst tot sein, um %s!redie %snutzen zu können.", OUTBREAK, SPECIAL, TEXT);
+			CPrintToChat(client, "Du musst tot sein, um %s!redie %snutzen zu können.", SPECIAL, TEXT);
 		}
 	}
 	
@@ -174,7 +178,7 @@ public Action Command_reback(int client, int args)
 		}
 		else
 		{
-			CPrintToChat(client, "%s Du musst im %s!redie %ssein, um %s!reback %snutzen zu können.", OUTBREAK, SPECIAL, TEXT, SPECIAL, TEXT);
+			CPrintToChat(client, "Du musst im %s!redie %ssein, um %s!reback %snutzen zu können.", SPECIAL, TEXT, SPECIAL, TEXT);
 		}
 	}
 	
@@ -235,7 +239,7 @@ public Action PlayerDeath(Event event, const char[] name, bool dontBroadcast)
 	{
 		if(CheckCommandAccess(client, "sm_redie", ADMFLAG_CUSTOM4))
 		{
-			CPrintToChat(client, "%s Gib %s!redie %sein, um als Geist weiterzuspielen.", OUTBREAK, SPECIAL, TEXT);
+			CPrintToChat(client, "Gib %s!redie %sein, um als Geist weiterzuspielen.", SPECIAL, TEXT);
 		}
 	}
 }
@@ -332,7 +336,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 				SetEntityMoveType(client, MOVETYPE_NOCLIP);
 				g_hNoclip[client] = CreateTimer(1.0, NoclipTimer, client);
 				
-				CPrintToChat(client, "%s Du hast für %s1 Sekunde %sNoclip.", OUTBREAK, SPECIAL, TEXT);
+				CPrintToChat(client, "Du hast für %s1 Sekunde %sNoclip.", SPECIAL, TEXT);
 			}
 		}
 	}
@@ -359,4 +363,47 @@ void ResetRedie(int client)
 public void OnClientDisconnect(int client)
 {
 	ResetRedie(client);
+}
+
+stock bool IsClientValid(int client, bool bots = false)
+{
+    if (client > 0 && client <= MaxClients)
+    {
+        if(IsClientInGame(client) && (bots || !IsFakeClient(client)) && !IsClientSourceTV(client))
+        {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+stock bool SafeRemoveWeapon(int iClient, int iWeapon)
+{
+    if (!IsValidEntity(iWeapon) || !IsValidEdict(iWeapon))
+        return false;
+    
+    if (!HasEntProp(iWeapon, Prop_Send, "m_hOwnerEntity"))
+        return false;
+    
+    int iOwnerEntity = GetEntPropEnt(iWeapon, Prop_Send, "m_hOwnerEntity");
+    
+    if (iOwnerEntity != iClient)
+        SetEntPropEnt(iWeapon, Prop_Send, "m_hOwnerEntity", iClient);
+    
+    CS_DropWeapon(iClient, iWeapon, false);
+    
+    if (HasEntProp(iWeapon, Prop_Send, "m_hWeaponWorldModel"))
+    {
+        int iWorldModel = GetEntPropEnt(iWeapon, Prop_Send, "m_hWeaponWorldModel");
+        
+        if (IsValidEdict(iWorldModel) && IsValidEntity(iWorldModel))
+            if (!AcceptEntityInput(iWorldModel, "Kill"))
+                return false;
+    }
+    
+    if (!AcceptEntityInput(iWeapon, "Kill"))
+        return false;
+    
+    return true;
 }
