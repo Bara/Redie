@@ -29,6 +29,6 @@ jobs:
 
       - name: Compile plugin
         run: |
-          echo -e "\nCompiling mvotes.sp..."
-          spcomp -E -w234 -O2 -v2 -i $SCRIPTS_PATH/include mvotes.sp
+          echo -e "\nCompiling redie.sp..."
+          spcomp -E -w234 -O2 -v2 -i $SCRIPTS_PATH/include redie.sp
         working-directory: ${{ env.SCRIPTS_PATH }}/
