@@ -139,10 +139,13 @@ public Action Command_Redie(int client, int args)
         char sFlags[24];
         g_cFlag.GetString(sFlags, sizeof(sFlags));
         
-        int iFlags = ReadFlagString(sFlags);
-        if (!CheckCommandAccess(client, "sm_redie", iFlags, true))
+        if (strlen(sFlags) > 0)
         {
-            return Plugin_Handled;
+            int iFlags = ReadFlagString(sFlags);
+            if (!CheckCommandAccess(client, "sm_redie", iFlags, true))
+            {
+                return Plugin_Handled;
+            }
         }
 
         if(!IsPlayerAlive(client))
@@ -217,10 +220,13 @@ public Action Command_Reback(int client, int args)
         char sFlags[24];
         g_cFlag.GetString(sFlags, sizeof(sFlags));
         
-        int iFlags = ReadFlagString(sFlags);
-        if (!CheckCommandAccess(client, "sm_reback", iFlags, true))
+        if (strlen(sFlags) > 0)
         {
-            return Plugin_Handled;
+            int iFlags = ReadFlagString(sFlags);
+            if (!CheckCommandAccess(client, "sm_reback", iFlags, true))
+            {
+                return Plugin_Handled;
+            }
         }
 
         if(g_bRedie[client])
@@ -296,11 +302,21 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
     
     if(IsClientValid(client))
     {
+        bool bDisplay = true;
         char sFlags[24];
         g_cFlag.GetString(sFlags, sizeof(sFlags));
         
-        int iFlags = ReadFlagString(sFlags);
-        if (CheckCommandAccess(client, "sm_redie", iFlags, true))
+        if (strlen(sFlags) > 0)
+        {
+            int iFlags = ReadFlagString(sFlags);
+
+            if(!CheckCommandAccess(client, "sm_redie", iFlags, true))
+            {
+                bDisplay = false;
+            }
+        }
+        
+        if (bDisplay)
         {
             CPrintToChat(client, "%T", "Chat Ad", client);
         }
