@@ -340,7 +340,6 @@ public Action Timer_FixSolids(Handle timer, int userid)
 
 public Action Timer_Noclip(Handle timer, int userid)
 {
-
     int client = GetClientOfUserId(userid);
 
     if (!IsClientValid(client))
