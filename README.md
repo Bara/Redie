@@ -2,11 +2,10 @@
 
 ---
 
-Worked well in the last days of Outbreak.
+Just another redie plugin, it has some features to prevent interactions with living players or abusing like buttons and doors.
 
 Features:
+ - Exit redie mode (!reback)
  - Buttons blocked
  - No door blocking
- - idk more...
 
-__HARDCODED STUFF INCLUDED (SETTINGS, GERMAN MESSAGES, ...)__
