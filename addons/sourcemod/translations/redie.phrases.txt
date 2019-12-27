@@ -1,0 +1,45 @@
+"Phrases"
+{
+    "You're a ghost now"
+    {
+        "en"    "You're a ghost now."
+        "de"    "Du bist nun ein Geist."
+    }
+
+    "Next Round"
+    {
+        "en"    "You must wait until the next round."
+        "de"    "Du musst bis zur nächsten Runde warten."
+    }
+
+    "Valid Team"
+    {
+        "en"    "You must be in a team, to use {lightgreen}!redie{default}."
+        "de"    "Du musst in einem Team sein, um {lightgreen}!redie {default}nutzen zu können."
+    }
+
+    "You must be dead"
+    {
+        "en"    "You must be dead, to use {lightgreen}!redie{default}."
+        "de"    "Du musst tot sein, um {lightgreen}!redie {default}nutzen zu können."
+    }
+
+    "Reback - In Redie"
+    {
+        "en"    "You must be in {lightgreen}!redie{default}, to use {lightgreen}!reback{default}."
+        "de"    "Du musst im {lightgreen}!redie {default}sein, um {lightgreen}reback {default}nutzen zu können."
+    }
+
+    "Chat Ad"
+    {
+        "en"    "Type {lightgreen}!redie {default}, to play again as ghost."
+        "de"    "Gib {lightgreen}!redie {default}ein, um als Geist weiterzuspielen."
+    }
+
+    "You have noclip now"
+    {
+        "#format"   "{1:d}"
+        "en"    "You've now {lightgreen}{1} second {default}Noclip."
+        "de"    "Du hast für {lightgreen}{1} Sekunde {default}Noclip."
+    }
+}
