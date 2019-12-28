@@ -4,36 +4,42 @@
     {
         "en"    "You're a ghost now."
         "de"    "Du bist nun ein Geist."
+        "pl"    "Od teraz jesteś duchem."
     }
 
     "Next Round"
     {
         "en"    "You must wait until the next round."
         "de"    "Du musst bis zur nächsten Runde warten."
+        "pl"    "Musisz poczekać do nastepnej rundy."
     }
 
     "Valid Team"
     {
         "en"    "You must be in a team, to use {lightgreen}!redie{default}."
         "de"    "Du musst in einem Team sein, um {lightgreen}!redie {default}nutzen zu können."
+        "pl"    "Musisz być w drużynie, aby użyć {lightgreen}!redie {default}."
     }
 
     "You must be dead"
     {
         "en"    "You must be dead, to use {lightgreen}!redie{default}."
         "de"    "Du musst tot sein, um {lightgreen}!redie {default}nutzen zu können."
+        "pl"    "Musisz nie żyć, aby użyć {lightgreen}!redie {default}."
     }
 
     "Reback - In Redie"
     {
         "en"    "You must be in {lightgreen}!redie{default}, to use {lightgreen}!reback{default}."
-        "de"    "Du musst im {lightgreen}!redie {default}sein, um {lightgreen}reback {default}nutzen zu können."
+        "de"    "Du musst im {lightgreen}!redie {default}sein, um {lightgreen}!reback {default}nutzen zu können."
+        "pl"    "Musisz być w {lightgreen}!redie {default}, aby użyć {lightgreen}!reback {default}."
     }
 
     "Chat Ad"
     {
         "en"    "Type {lightgreen}!redie {default}, to play again as ghost."
         "de"    "Gib {lightgreen}!redie {default}ein, um als Geist weiterzuspielen."
+        "pl"    "Wpisz {lightgreen}!redie {default}, aby zagrać ponownie jako duch."
     }
 
     "You have noclip now"
@@ -41,5 +47,6 @@
         "#format"   "{1:d}"
         "en"    "You've now {lightgreen}{1} second {default}Noclip."
         "de"    "Du hast für {lightgreen}{1} Sekunde {default}Noclip."
+        "pl"    "Otrzymałeś Noclip'a na {lightgreen}{1} sekund{default}."
     }
 }
